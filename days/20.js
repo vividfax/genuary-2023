@@ -11,7 +11,7 @@ class Sketch20 extends Sketch {
             "light": "#CBAF49",
             "mid": "#CEA441",
             "dark": "#1E7174",
-            "black": "#000D23"
+            "black": "#101A2B"
         }
 
         this.font = "Limelight";
