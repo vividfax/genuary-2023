@@ -37,8 +37,12 @@ function setup() {
 
 function draw() {
 
+    push();
+
     sketches[day-1].update();
     sketches[day-1].display();
+
+    pop();
 }
 
 function createSketches() {

@@ -95,6 +95,21 @@ class Sketch25 extends Sketch {
         threeD.pop();
 
         image(threeD, 0, 0);
+
+        noFill();
+        stroke(this.palette.dark);
+        strokeWeight(6);
+        rect(width/2, height/2, width-40, height-40, 50);
+        rect(width/2, height/2, width-40, height-40, 40);
+        rect(width/2, height/2, width-40, height-40, 30);
+        rect(width/2, height/2, width-40, height-40, 20);
+        rect(width/2, height/2, width-40, height-40, 10);
+
+        // stroke(this.palette.light);
+
+        strokeWeight(20);
+        rect(width/2, height/2, width, height, 30);
+        rect(width/2, height/2, width, height, 0);
     }
 
 
