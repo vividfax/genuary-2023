@@ -19,6 +19,11 @@ class Sketch20 extends Sketch {
         this.noLoop = true;
     }
 
+    prerun() {
+
+        textFont(this.font);
+    }
+
     update() {
 
     }
@@ -26,8 +31,6 @@ class Sketch20 extends Sketch {
     display() {
 
         push();
-
-        textFont(this.font);
 
         background(this.palette.black)
 
