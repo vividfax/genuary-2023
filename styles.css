@@ -37,11 +37,15 @@ button:hover {
 }
 
 #previous {
-    transform: translate(-230px, 0);
+    transform: translate(-330px, 0);
 }
 
 #next {
-    transform: translate(30px, 0);
+    transform: translate(130px, 0);
+}
+
+#regenerate {
+    transform: translate(-100px, 0);
 }
 
 #dayText {

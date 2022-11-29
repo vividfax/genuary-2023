@@ -1,5 +1,6 @@
 let nextButton;
 let previousButton;
+let regenerateButton;
 let dayText;
 
 function createUI() {
@@ -11,6 +12,10 @@ function createUI() {
     previousButton = createButton("Previous");
     previousButton.id("previous")
     previousButton.mousePressed(previousDay);
+
+    regenerateButton = createButton("Regenerate");
+    regenerateButton.id("regenerate")
+    regenerateButton.mousePressed(regenerate);
 
     dayText = createDiv();
     dayText.id("dayText")
@@ -32,6 +37,12 @@ function previousDay() {
     resetSketch();
     day--;
     updateUI();
+    changeSketch();
+}
+
+function regenerate() {
+
+    resetSketch();
     changeSketch();
 }
 
