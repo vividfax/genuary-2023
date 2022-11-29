@@ -11,7 +11,7 @@ class Sketch21 extends Sketch {
             "light": "#C47B4D",
             "mid": "#5A718B",
             "dark": "#843434",
-            "black": "#141E40",
+            "black": "#141E40"
         }
 
         this.init();

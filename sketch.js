@@ -1,4 +1,4 @@
-let day = 21;
+let day = 20;
 
 let totalDays = 31;
 
@@ -15,6 +15,8 @@ function setup() {
     background("#000");
 
     rectMode(CENTER);
+    angleMode(DEGREES);
+    textAlign(CENTER, CENTER);
 
     createSketches();
     createUI();
@@ -42,5 +44,12 @@ function resetSketch() {
 function changeSketch() {
 
     clear();
+
+    if (sketches[day-1].noLoop) {
+        noLoop();
+    } else {
+        loop();
+    }
+
     sketches[day-1].prerun();
 }

@@ -11,7 +11,7 @@ class Sketch19 extends Sketch {
             "light": 191,
             "mid": 127,
             "dark": 63,
-            "black": 0,
+            "black": 0
         }
 
         this.size;

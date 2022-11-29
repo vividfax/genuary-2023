@@ -43,6 +43,7 @@ function previousDay() {
 function regenerate() {
 
     resetSketch();
+    loop();
     changeSketch();
 }
 
