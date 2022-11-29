@@ -1,22 +1,33 @@
-let day = 20;
+let day = 25;
 
 let totalDays = 31;
 
 let promptTexts;
+let gourd3D;
+
+let canvas;
+let twoD;
+let threeD;
 
 function preload() {
 
     promptTexts = loadJSON("./json/prompts.json");
+
+    gourd3D = loadModel("./objs/gourd.obj");
 }
 
 function setup() {
 
-    createCanvas(540, 540);
+    canvas = createCanvas(540, 540);
+    twoD = createGraphics(540, 540);
+    threeD = createGraphics(540, 540, WEBGL);
     background("#000");
 
     rectMode(CENTER);
     angleMode(DEGREES);
     textAlign(CENTER, CENTER);
+
+    threeD.angleMode(DEGREES);
 
     createSketches();
     createUI();
@@ -42,6 +53,7 @@ function resetSketch() {
 
 function changeSketch() {
 
+    threeD.clear();
     clear();
 
     if (sketches[day-1].noLoop) {
