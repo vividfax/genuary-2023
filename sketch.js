@@ -37,7 +37,6 @@ function createSketches() {
 
 function resetSketch() {
 
-    console.log(day)
     sketches[day-1].init();
 }
 
