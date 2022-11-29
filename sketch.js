@@ -4,6 +4,7 @@ let totalDays = 31;
 
 let promptTexts;
 let gourd3D;
+let pumpkin3D;
 
 let canvas;
 let twoD;
@@ -14,6 +15,7 @@ function preload() {
     promptTexts = loadJSON("./json/prompts.json");
 
     gourd3D = loadModel("./objs/gourd.obj");
+    pumpkin3D = loadModel("./objs/pumpkin.obj");
 }
 
 function setup() {

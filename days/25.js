@@ -2,6 +2,8 @@
 
 // https://sketchfab.com/3d-models/gourd-05197c7001b343e183e561c66134c951
 
+//https://sketchfab.com/3d-models/big-pumpkin-pbr-6379a27182aa4bce8ae38465834cb068
+
 class Sketch25 extends Sketch {
 
     constructor(dayNumber) {
@@ -63,19 +65,32 @@ class Sketch25 extends Sketch {
         threeD.background(this.palette.mid);
         threeD.noStroke();
         threeD.texture(twoD);
-        threeD.rotateY(frameCount*0.1);
-        // threeD.sphere(430);
 
-        // threeD.sphere(30);
+        threeD.rotateY(frameCount*0.5);
+
+        threeD.push();
         threeD.scale(80);
         threeD.rotateX(180);
         threeD.model(gourd3D);
-        // this.drawSphere(180, 1, 200);
-        // this.drawSphere(90, 15, 100);
-        // this.drawSphere(110, 2, 300);
-        // this.drawSphere(210, 25, 50);
-        // this.drawSphere(70, 3, 250);
+        threeD.pop();
 
+        threeD.push();
+        threeD.translate(0, 50, 0);
+        threeD.scale(100);
+        threeD.rotateX(180);
+        threeD.rotateY(frameCount*.75);
+        threeD.model(pumpkin3D);
+        threeD.rotateY(frameCount*-.5);
+        threeD.translate(0, 1.75, 0);
+        threeD.model(pumpkin3D);
+        threeD.translate(0, -3.5, 0);
+        threeD.rotateY(180);
+        threeD.model(pumpkin3D);
+        threeD.pop();
+
+        this.drawSphere(180, 1*.8, 200);
+        this.drawSphere(110, 2*.8, 300);
+        this.drawSphere(70, 3*.8, 250);
 
         threeD.pop();
 
@@ -88,14 +103,17 @@ class Sketch25 extends Sketch {
         threeD.push();
         threeD.rotateX(90);
         threeD.rotateY(90);
-        let s = 0.01;
+        let s = 1;
         threeD.rotateZ(frameCount * s + delay);
         threeD.rotateY(frameCount * s + delay);
         threeD.rotateX(frameCount * s + delay);
         threeD.translate(distance, distance, 0);
         threeD.scale(height * 0.25);
         threeD.noStroke();
-        threeD.sphere(size);
+        // threeD.sphere(size);
+        threeD.scale(size);
+        threeD.model(pumpkin3D);
+
         threeD.pop();
     }
 
