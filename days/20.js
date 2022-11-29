@@ -9,9 +9,9 @@ class Sketch20 extends Sketch {
         this.palette = {
             "white": "#FFE68A",
             "light": "#CBAF49",
-            "mid": "#BA9746",
+            "mid": "#CEA441",
             "dark": "#1E7174",
-            "black": "#101A2B"
+            "black": "#000D23"
         }
 
         this.font = "Limelight";
