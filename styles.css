@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Baloo Tamma 2";
+    src: url("./fonts/BalooTamma2-Regular.ttf");
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -6,7 +11,7 @@ body {
     color: #888;
     font-size: xx-large;
     line-height: 100%;
-    font-family: "Baloo Tamma 2", sans-serif;
+    font-family: "Baloo Tamma 2", monospace;
 }
 
 canvas {

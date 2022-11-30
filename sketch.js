@@ -10,12 +10,16 @@ let canvas;
 let twoD;
 let threeD;
 
+let limelightFont;
+
 function preload() {
 
     promptTexts = loadJSON("./json/prompts.json");
 
     gourd3D = loadModel("./objs/gourd.obj");
     pumpkin3D = loadModel("./objs/pumpkin.obj");
+
+    limelightFont = loadFont("./fonts/Limelight-Regular.ttf");
 }
 
 function setup() {
@@ -28,7 +32,6 @@ function setup() {
     rectMode(CENTER);
     angleMode(DEGREES);
     textAlign(CENTER, CENTER);
-    textFont("Limelight");
 
     threeD.angleMode(DEGREES);
 

@@ -14,15 +14,12 @@ class Sketch20 extends Sketch {
             "black": "#101A2B"
         }
 
-        this.font = "Limelight";
-
         this.noLoop = true;
     }
 
     prerun() {
 
-        textFont(this.font);
-        text("Genuary", 0, 0);
+        textFont(limelightFont);
     }
 
     update() {
