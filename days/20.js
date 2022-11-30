@@ -22,6 +22,7 @@ class Sketch20 extends Sketch {
     prerun() {
 
         textFont(this.font);
+        text("Genuary", 0, 0);
     }
 
     update() {

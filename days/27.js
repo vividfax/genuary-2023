@@ -7,12 +7,12 @@ class Sketch27 extends Sketch {
         super(dayNumber);
 
         this.palette = {
-            "white": "#FDE8EF",
-            "light": "#FFDA73",
-            "mid": "#5B92AF",
-            "dark": "#E8513A",
-            "black": "#1B1F1E",
-            "extra": "#FFBDB7"
+            "white": ["#FDE8EF", "#F6D9E3"],
+            "light": ["#FFDA73", "#F1CC68"],
+            "mid": ["#5B92AF", "#538AA8"],
+            "dark": ["#E8513A", "#DB4933"],
+            "black": ["#1B1F1E", "#1E2322"],
+            "extra": ["#FFBDB7", "#F3B2AE"]
         }
 
         this.noLoop = true;
@@ -22,7 +22,7 @@ class Sketch27 extends Sketch {
 
         this.circles = [];
 
-        for (let i = 0; i < 200; i++) {
+        for (let i = 0; i < 300; i++) {
 
             let x = random(width);
             let y = random(height);
@@ -46,8 +46,10 @@ class Sketch27 extends Sketch {
                 if (grow) this.circles[i].grow();
             }
 
-            if (this.circles[i].radius < 40) this.circles[i].radius = 0;
+            if (this.circles[i].radius < 30) this.circles[i].radius = 0;
         }
+
+        pattern(PTN.noise(0.1));
     }
 
     update() {
@@ -56,24 +58,34 @@ class Sketch27 extends Sketch {
 
     display() {
 
-        background(this.palette.dark);
+        noStroke();
+        patternColors(this.palette.dark);
+        rectPattern(width/2, height/2, width, height);
 
         for (let i = 0; i < this.circles.length; i++) {
 
-            let circleTypes = ["sections", "shell"];
+            let circleTypes = ["sections", "sections", "shell", "shell", "strokeFlower", "strokeFlower", "spiral", "spiral", "seven"];
             let type = random(circleTypes);
 
             if (type == "sections") {
                 this.drawSectionedCircle(this.circles[i].x, this.circles[i].y, this.circles[i].radius);
             } else if (type == "shell") {
                 this.drawShell(this.circles[i].x, this.circles[i].y, this.circles[i].radius);
+            } else if (type == "strokeFlower") {
+                this.drawStrokeFlower(this.circles[i].x, this.circles[i].y, this.circles[i].radius);
+            } else if (type == "spiral") {
+                this.drawSpiral(this.circles[i].x, this.circles[i].y, this.circles[i].radius);
+            } else if (type == "seven") {
+                this.drawSeven(this.circles[i].x, this.circles[i].y, this.circles[i].radius);
             }
         }
 
         noFill();
-        stroke(this.palette.light);
+        stroke(this.palette.light[0]);
         strokeWeight(14);
         rect(width/2, height/2, width, height);
+
+        // filter(BLUR, 1);
     }
 
     drawSectionedCircle(x, y, size) {
@@ -81,24 +93,30 @@ class Sketch27 extends Sketch {
         if (size <= 0) return;
         size *= 2;
 
-
         push();
         translate(x, y);
         rotate(random(360));
 
+        let w = size*random(0.95, 1);
+        let h = size*random(0.95, 1);
+
         noStroke();
-        fill(randomColour(this.palette));
-        arc(0, 0, size, size, 90, 270);
-        fill(randomColour(this.palette));
-        arc(0, 0, size, size, 270, 90);
-        fill(randomColour(this.palette));
-        arc(0, 0, size*2/3, size*2/3, 90, 270);
-        fill(randomColour(this.palette));
-        arc(0, 0, size*2/3, size*2/3, 270, 90);
-        fill(randomColour(this.palette));
-        arc(0, 0, size*1/3, size*1/3, 270, 90);
-        fill(randomColour(this.palette));
-        arc(0, 0, size*1/3, size*1/3, 90, 270);
+        let sectionColour = randomColour(this.palette);
+        while (sectionColour == this.palette.dark) sectionColour = randomColour(this.palette);
+        patternColors(sectionColour);
+        arcPattern(0, 0, w, h, 0, 360);
+        sectionColour = randomColour(this.palette);
+        while (sectionColour == this.palette.dark) sectionColour = randomColour(this.palette);
+        patternColors(sectionColour);
+        arcPattern(0, 0, w, h, 270, 90);
+        patternColors(randomColour(this.palette));
+        arcPattern(0, 0, w*2/3, h*2/3, 90, 270);
+        patternColors(randomColour(this.palette));
+        arcPattern(0, 0, w*2/3, h*2/3, 270, 90);
+        patternColors(randomColour(this.palette));
+        arcPattern(0, 0, w*1/3, h*1/3, 270, 90);
+        patternColors(randomColour(this.palette));
+        arcPattern(0, 0, w*1/3, h*1/3, 90, 270);
 
         pop();
     }
@@ -112,18 +130,135 @@ class Sketch27 extends Sketch {
         translate(x, y);
         rotate(random(360));
 
-        let strokeColour = randomColour(this.palette);
         let fillColour = randomColour(this.palette);
+        let strokeColour = randomColour(this.palette);
 
+        while (fillColour == this.palette.dark) fillColour = randomColour(this.palette);
         while (strokeColour == fillColour || strokeColour == this.palette.dark) strokeColour = randomColour(this.palette);
 
-        stroke(strokeColour);
-        fill(fillColour);
+        let w = size * random(0.95, 1);
+        let h = size * random(0.95, 1);
 
-        for (let i = 0; i < 20; i++) {
+        patternColors(fillColour);
+        arcPattern(0, 0, w, h, 0, 360);
 
-            if (size-i*10 < 0) break;
-            ellipse(0, i*5, size-i*10, size-i*10);
+        strokeWeight(2);
+        stroke(strokeColour[0]);
+
+        for (let i = 0; i < 20; i+=2) {
+
+            if (size-i*10 < 15) break;
+            ellipse(0, i*5, w-i*10, h-i*10);
+        }
+
+        pop();
+    }
+
+    drawStrokeFlower(x, y , size) {
+
+        if (size <= 0) return;
+        size *= 2;
+
+        push();
+        translate(x, y);
+        rotate(random(360));
+
+        let strokeColour = randomColour(this.palette);
+        while (strokeColour == this.palette.dark) strokeColour = randomColour(this.palette);
+
+        strokeWeight(2);
+        stroke(strokeColour[0]);
+
+        ellipseMode(CORNER);
+
+        for (let i = 0; i < 5; i++) {
+            rotate(72);
+            ellipse(-size*.17, 0, size*random(0.95, 1)*0.5, size*random(0.95, 1)*0.5);
+        }
+
+        pop();
+    }
+
+    drawSpiral(x, y, size) {
+
+        if (size <= 0) return;
+
+        size *= 2;
+
+        let radius = 0;
+        let angle = 0;
+
+        push();
+        translate(x, y);
+        rotate(random(360));
+
+        let fillColour = randomColour(this.palette);
+        let strokeColour = randomColour(this.palette);
+
+        while (fillColour == this.palette.dark) fillColour = randomColour(this.palette);
+        while (strokeColour == fillColour || strokeColour == this.palette.dark) strokeColour = randomColour(this.palette);
+
+        patternColors(fillColour);
+        arcPattern(0, 0, size, size, 0, 360);
+
+        strokeWeight(2);
+        stroke(strokeColour[0]);
+        ellipse(0, 0, size, size);
+
+        noFill();
+
+        for (let i = 0; i < 3000; i++) {
+
+            rotate(angle);
+            angle += 0.0005;
+            radius += 0.015*size/60;
+            point(radius, 0);
+
+            if (radius > size/2 || radius > size/2) break;
+        }
+
+        strokeWeight(5);
+        point(-2, 1);
+
+        pop();
+    }
+
+    drawSeven(x, y, size) {
+
+        if (size <= 0) return;
+
+        push();
+        translate(x, y);
+        rotate(random(360));
+
+        let fillColour = randomColour(this.palette);
+        let strokeColour = randomColour(this.palette);
+
+        while (fillColour == this.palette.dark) fillColour = randomColour(this.palette);
+        while (strokeColour == fillColour || strokeColour == this.palette.dark) strokeColour = randomColour(this.palette);
+
+        patternColors(fillColour);
+        arcPattern(0, 0, size*.7, size*.7, 0, 360);
+
+        noFill();
+        stroke(strokeColour[0]);
+        strokeWeight(2);
+        ellipse(0, 0, size*.7, size*.7);
+
+        ellipseMode(CORNER);
+
+        for (let i = 0; i < 6; i++) {
+            rotate(60);
+
+            fillColour = randomColour(this.palette);
+            while (fillColour == this.palette.dark || fillColour == strokeColour) fillColour = randomColour(this.palette);
+            patternColors(fillColour);
+            arcPattern(-size*.95, 0, size*.7, size*.7, 0, 360);
+
+            noFill();
+            stroke(strokeColour[0]);
+            strokeWeight(2);
+            ellipse(-size*.95, 0, size*.7, size*.7);
         }
 
         pop();
@@ -162,3 +297,21 @@ class CirclePackCircle {
         this.radius++;
     }
 }
+
+// function randPattern(t)
+// {
+//     const ptArr = [
+//         PTN.noise(0.5),
+//         PTN.noiseGrad(0.4),
+//         PTN.stripe(t / int(random(6, 12))),
+//         PTN.stripeCircle(t / int(random(6, 12))),
+//         PTN.stripePolygon(int(random(3, 7)),  int(random(6, 12))),
+//         PTN.stripeRadial(TAU /  int(random(6, 30))),
+//         PTN.wave(t / int(random(1, 3)), t / int(random(10, 20)), t / 5, t / 10),
+//         PTN.dot(t / 10, t / 10 * random(0.2, 1)),
+//         PTN.checked(t / int(random(5, 20)), t / int(random(5, 20))),
+//         PTN.cross(t / int(random(10, 20)), t / int(random(20, 40))),
+//         PTN.triangle(t / int(random(5, 20)), t / int(random(5, 20)))
+//     ]
+//     return random(ptArr);
+// }

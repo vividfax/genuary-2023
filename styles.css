@@ -4,7 +4,9 @@ body {
     overflow: hidden;
     background-color: #111;
     color: #888;
-    font-size: 30px;
+    font-size: xx-large;
+    line-height: 100%;
+    font-family: "Baloo Tamma 2", sans-serif;
 }
 
 canvas {
@@ -16,11 +18,12 @@ canvas {
 }
 
 button {
-    font-family: "Fira Code", serif;
+    font-family: "Baloo Tamma 2", sans-serif;
     width: 200px;
     height: 40px;
     border-radius: 5px;
     border-style: none;
+    line-height: 100%;
     font-size: large;
     color: #000;
     background-color: #888;
