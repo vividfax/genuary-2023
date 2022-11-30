@@ -217,8 +217,8 @@ class Sketch27 extends Sketch {
             if (radius > size/2 || radius > size/2) break;
         }
 
-        strokeWeight(5);
-        point(-2, 1);
+        strokeWeight(10);
+        point(-4, 2);
 
         pop();
     }
