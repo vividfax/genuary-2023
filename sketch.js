@@ -28,6 +28,7 @@ function setup() {
     rectMode(CENTER);
     angleMode(DEGREES);
     textAlign(CENTER, CENTER);
+    textFont("Limelight");
 
     threeD.angleMode(DEGREES);
 
