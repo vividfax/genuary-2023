@@ -21,12 +21,12 @@ class Sketch25 extends Sketch {
 
     prerun() {
 
-        twoD.background(this.palette.mid);
+        twoDSmall.background(this.palette.mid);
 
         let radius = 60;
         let spacing = 2;
-        twoD.noStroke();
-        twoD.fill(this.palette.black);
+        twoDSmall.noStroke();
+        twoDSmall.fill(this.palette.black);
 
         for (let j = 0; j < 11; j++) {
 
@@ -34,7 +34,7 @@ class Sketch25 extends Sketch {
 
             for (let i = -radius; i < height+radius*2; i += radius) {
                 let radiusOffset = random(0.85, 1);
-                twoD.ellipse(radius*j*.8+j*21, i+topOffset, radiusOffset*radius-spacing, radiusOffset*radius-spacing);
+                twoDSmall.ellipse(radius*j*.8+j*21, i+topOffset, radiusOffset*radius-spacing, radiusOffset*radius-spacing);
             }
 
             radius *= 0.85;
@@ -48,7 +48,7 @@ class Sketch25 extends Sketch {
 
             for (let i = -radius; i < height+radius*2; i += radius) {
                 let radiusOffset = random(0.85, 1);
-                twoD.ellipse(width*.35+10*.7+j*12, i+topOffset, radiusOffset*radius-spacing, radiusOffset*radius-spacing);
+                twoDSmall.ellipse(width*.35+10*.7+j*12, i+topOffset, radiusOffset*radius-spacing, radiusOffset*radius-spacing);
             }
         }
     }
@@ -64,7 +64,7 @@ class Sketch25 extends Sketch {
 
         threeD.background(this.palette.mid);
         threeD.noStroke();
-        threeD.texture(twoD);
+        threeD.texture(twoDSmall);
 
         threeD.rotateY(frameCount*0.5);
 

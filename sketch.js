@@ -1,4 +1,4 @@
-let day = 14;
+let day = 24;
 
 let totalDays = 31;
 
@@ -7,6 +7,7 @@ let gourd3D;
 let pumpkin3D;
 
 let canvas;
+let twoDSmall;
 let twoD;
 let threeD;
 
@@ -27,7 +28,8 @@ function preload() {
 function setup() {
 
     canvas = createCanvas(540, 540);
-    twoD = createGraphics(540, 540);
+    twoDSmall = createGraphics(540, 540);
+    twoD = createGraphics(1080, 1080);
     threeD = createGraphics(540, 540, WEBGL);
     background("#000");
 
@@ -67,8 +69,10 @@ function resetSketch() {
 
 function changeSketch() {
 
-    threeD.clear();
     clear();
+    twoD.clear();
+    twoDSmall.clear();
+    threeD.clear();
 
     sketches[day-1].prerun();
 
