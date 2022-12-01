@@ -1,4 +1,4 @@
-let day = 7;
+let day = 14;
 
 let totalDays = 31;
 
@@ -11,6 +11,8 @@ let twoD;
 let threeD;
 
 let limelightFont;
+
+var scribble;
 
 function preload() {
 
@@ -28,6 +30,8 @@ function setup() {
     twoD = createGraphics(540, 540);
     threeD = createGraphics(540, 540, WEBGL);
     background("#000");
+
+    scribble = new Scribble();
 
     rectMode(CENTER);
     angleMode(DEGREES);
