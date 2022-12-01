@@ -75,7 +75,8 @@ class Sketch20 extends Sketch {
         fill(this.palette.black);
         noStroke();
         textSize(50);
-        text("Genuary", 0, 0);
+        textAlign(CENTER, CENTER);
+        text("Genuary", 0, -10);
 
         pop();
     }

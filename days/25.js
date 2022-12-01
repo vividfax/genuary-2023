@@ -17,6 +17,8 @@ class Sketch25 extends Sketch {
             "dark": "#FF4400",
             "black": "#0C0900"
         }
+
+        this.complete = true;
     }
 
     prerun() {
