@@ -1,4 +1,4 @@
-// Aesemic
+// Asemic
 
 class Sketch14 extends Sketch {
 
@@ -10,7 +10,8 @@ class Sketch14 extends Sketch {
             "white": color(228, 223, 218), // E4DFDA
             "light": "#D4B483",
             "mid": "#48A9A6",
-            "dark": "#C1666B",
+            "dark": color(193, 102, 107), // #C1666B
+            "darkTransparent": color(193, 102, 107, 0), // #C1666B
             "black": color(25, 57, 75), // #19394B
             "blackTransparent": color(25, 57, 75, 0) // #19394B
         }
@@ -20,8 +21,7 @@ class Sketch14 extends Sketch {
 
     prerun() {
 
-        let backgroundColour = randomColour(this.palette);
-        while (backgroundColour == this.palette.black || backgroundColour == this.palette.blackTransparent || backgroundColour == this.palette.white) backgroundColour = randomColour(this.palette);
+        let backgroundColour = randomColour([this.palette.light, this.palette.mid]);
         this.backgroundColour = backgroundColour;
     }
 
@@ -68,7 +68,12 @@ class Sketch14 extends Sketch {
             pop();
         }
 
+        let number = 0;
+        textFont("monospace");
+
         for (let k = padding; k <= width-padding-w; k += 100) {
+
+            number++;
 
             push();
             translate(k+w, 0);
@@ -78,7 +83,12 @@ class Sketch14 extends Sketch {
             strokeWeight(1.5);
             line(0, 0, 0, height);
 
+            for (let l = 0; l < number; l++) {
+                line(-w*.75+l*3, 35, -w*.75+l*3, 40);
+            }
+
             pop();
+
         }
 
         let scribbleSize = 33;
@@ -103,16 +113,40 @@ class Sketch14 extends Sketch {
                 pop();
 
                 if (random() < 0.5) {
-                    this.displayCharacter(k, l, w*2, h);
+                    this.displayCharacter(k, l, w*2, h, this.palette.blackTransparent, this.palette.black);
                 } else {
-                    this.displayCharacter(k, l, w, h);
-                    this.displayCharacter(k+w, l, w, h);
+                    this.displayCharacter(k, l, w, h, this.palette.blackTransparent, this.palette.black);
+                    this.displayCharacter(k+w, l, w, h, this.palette.blackTransparent, this.palette.black);
+                }
+
+                if (random() < 0.05) {
+
+                    push();
+                    translate(k+w, l+h/2);
+
+                    stroke(this.palette.dark);
+                    noFill();
+
+                    push();
+                    rotate(random(360));
+                    scribble.scribbleEllipse(0, 0, random(w*2, w*2*1.3), random(h, h*1.3));
+                    pop();
+
+                    fill(this.palette.dark);
+                    noStroke();
+                    translate(w*1.5, -h/2);
+                    this.displayCharacter(0, 0, w, h, this.palette.dark, this.palette.dark);
+                    pop();
                 }
             }
         }
+
+        for (let i = 0; i < 3; i++) {
+
+        }
     }
 
-    displayCharacter(k, l, w, h) {
+    displayCharacter(k, l, w, h, colourA, colourB) {
 
         push();
         translate(k, l);
@@ -143,8 +177,9 @@ class Sketch14 extends Sketch {
                 let linePointX = bezierPoint(firstPoint[0], firstControlPoint[0], secondControlPoint[0], secondPoint[0], step);
                 let linePointY = bezierPoint(firstPoint[1], firstControlPoint[1], secondControlPoint[1], secondPoint[1], step);
 
-                fill(lerpColor(this.palette.blackTransparent, this.palette.black, colourFadeRatio));
-                ellipse(linePointX, linePointY, 50/steps-j/10+2);
+                fill(lerpColor(colourA, colourB, colourFadeRatio));
+                if (colourA == this.palette.dark) ellipse(linePointX, linePointY, 50/steps-j/20+2);
+                else ellipse(linePointX, linePointY, 50/steps-j/10+2);
             }
         }
 
