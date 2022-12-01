@@ -57,7 +57,6 @@ class Sketch27 extends Sketch {
     }
 
     display() {
-        console.log(frameCount);
 
         noStroke();
         patternColors(this.palette.dark);
