@@ -15,6 +15,7 @@ class Sketch27 extends Sketch {
             "extra": ["#FFBDB7", "#F3B2AE"]
         }
 
+        this.complete = true;
         this.noLoop = true;
     }
 

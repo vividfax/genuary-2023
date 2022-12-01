@@ -1,4 +1,4 @@
-let day = 24;
+let day = 16;
 
 let totalDays = 31;
 
@@ -69,7 +69,7 @@ function resetSketch() {
 
 function changeSketch() {
 
-    clear();
+    if (!sketches[day-1].noClear) clear();
     twoD.clear();
     twoDSmall.clear();
     threeD.clear();

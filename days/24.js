@@ -16,6 +16,7 @@ class Sketch24 extends Sketch {
             "black": "#861657"
         }
 
+        this.complete = true;
         // this.noLoop = true;
 
         this.x = 0;

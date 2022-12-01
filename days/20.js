@@ -14,6 +14,7 @@ class Sketch20 extends Sketch {
             "black": "#101A2B"
         }
 
+        this.complete = true;
         this.noLoop = true;
     }
 

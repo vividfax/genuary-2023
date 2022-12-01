@@ -14,6 +14,7 @@ class Sketch21 extends Sketch {
             "black": "#141E40"
         }
 
+        this.complete = true;
         this.init();
     }
 

@@ -6,7 +6,9 @@ class Sketch {
 
         this.dayNumber = dayNumber;
 
+        this.complete = false;
         this.noLoop = false;
+        this.noClear = false;
     }
 
     init() {

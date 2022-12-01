@@ -19,6 +19,8 @@ class Sketch7 extends Sketch {
             "extra": "#BA3333"
         }
 
+        this.complete = true;
+
         for (let i = 0; i < 1500; i++) {
             snowParticles.push(new SnowParticle());
         }

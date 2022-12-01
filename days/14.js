@@ -16,6 +16,7 @@ class Sketch14 extends Sketch {
             "blackTransparent": color(25, 57, 75, 0) // #19394B
         }
 
+        this.complete = true;
         this.noLoop = true;
     }
 

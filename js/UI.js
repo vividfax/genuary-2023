@@ -26,16 +26,26 @@ function createUI() {
 
 function nextDay() {
 
-    // resetSketch();
-    day++;
+    let prospectiveDay = day;
+    prospectiveDay++;
+    while (prospectiveDay < totalDays && !sketches[prospectiveDay-1].complete) prospectiveDay++;
+    if (prospectiveDay >= totalDays) return;
+
+    day = prospectiveDay;
+
     updateUI();
     changeSketch();
 }
 
 function previousDay() {
 
-    // resetSketch();
-    day--;
+    let prospectiveDay = day;
+    prospectiveDay--;
+    while (prospectiveDay > 0 && !sketches[prospectiveDay-1].complete) prospectiveDay--;
+    if (prospectiveDay <= 0) return;
+
+    day = prospectiveDay;
+
     updateUI();
     changeSketch();
 }
