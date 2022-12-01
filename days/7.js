@@ -2,6 +2,8 @@
 
 // Grand Budapest Hotel
 
+let snowParticles = [];
+
 class Sketch7 extends Sketch {
 
     constructor(dayNumber) {
@@ -17,22 +19,21 @@ class Sketch7 extends Sketch {
             "extra": "#BA3333"
         }
 
-        this.noLoop = true;
+        for (let i = 0; i < 1500; i++) {
+            snowParticles.push(new SnowParticle());
+        }
     }
 
-    update() {
+    prerun() {
 
-    }
-
-    display() {
-
-        push();
-        rectMode(CORNER);
-        noStroke();
-        fill(this.palette.light);
-        background(this.palette.mid);
-        rect(0, 0, width, 430);
-        pop();
+        twoD.rectMode(CENTER);
+        twoD.push();
+        twoD.rectMode(CORNER);
+        twoD.noStroke();
+        twoD.fill(this.palette.light);
+        twoD.background(this.palette.mid);
+        twoD.rect(0, 0, width, 430);
+        twoD.pop();
 
         this.displayWindows();
         this.displayColumns();
@@ -41,10 +42,24 @@ class Sketch7 extends Sketch {
         this.displayDormers();
     }
 
+    update() {
+
+    }
+
+    display() {
+
+        image(twoD, 0, 0);
+
+        for (let i = 0; i < snowParticles.length; i++) {
+            snowParticles[i].update();
+            snowParticles[i].display();
+        }
+    }
+
     displayWindows() {
 
-        push();
-        translate(0, 6);
+        twoD.push();
+        twoD.translate(0, 6);
 
         let windowW = 19;
         let windowH = windowW*2.3;
@@ -57,19 +72,19 @@ class Sketch7 extends Sketch {
 
         for (let j = 0; j < rows; j++) {
 
-            push();
-            translate(0, -windowH/2);
-            rectMode(CORNER);
-            noStroke();
-            if (j < 6) fill(this.palette.mid);
-            else (fill(this.palette.dark));
-            rect(0, j*windowH*1.7-windowH*.1, width, windowH*.25);
-            rect(0, j*windowH*1.7+windowH, width, windowH*.25);
-            fill(this.palette.white);
-            rect(0, j*windowH*1.7-windowH*.1, width, windowH*.12);
-            rect(0, j*windowH*1.7+windowH, width, windowH*.14);
+            twoD.push();
+            twoD.translate(0, -windowH/2);
+            twoD.rectMode(CORNER);
+            twoD.noStroke();
+            if (j < 6) twoD.fill(this.palette.mid);
+            else (twoD.fill(this.palette.dark));
+            twoD.rect(0, j*windowH*1.7-windowH*.1, width, windowH*.25);
+            twoD.rect(0, j*windowH*1.7+windowH, width, windowH*.25);
+            twoD.fill(this.palette.white);
+            twoD.rect(0, j*windowH*1.7-windowH*.1, width, windowH*.12);
+            twoD.rect(0, j*windowH*1.7+windowH, width, windowH*.14);
 
-            pop();
+            twoD.pop();
 
             for (let i = padding; i <= width-padding; i += windowW*2.4) {
 
@@ -89,129 +104,129 @@ class Sketch7 extends Sketch {
                     pinkWindowChance--;
                 }
 
-                push();
-                translate(i-windowW/2, j*windowH*1.7);
-                translate(0, -windowH/2);
-                rectMode(CORNER);
-                noStroke();
-                fill(this.palette.white);
-                quad(-windowW*0.3, -windowH*.1, 0, windowH*.4, windowW, windowH*.4, windowW+windowW*0.3, -windowH*.1);
+                twoD.push();
+                twoD.translate(i-windowW/2, j*windowH*1.7);
+                twoD.translate(0, -windowH/2);
+                twoD.rectMode(CORNER);
+                twoD.noStroke();
+                twoD.fill(this.palette.white);
+                twoD.quad(-windowW*0.3, -windowH*.1, 0, windowH*.4, windowW, windowH*.4, windowW+windowW*0.3, -windowH*.1);
 
-                fill(windowColour);
-                rect(0, 0, windowW, windowH, windowW, windowW, 0, 0);
-                stroke(barColour);
-                strokeWeight(windowW*.1);
-                line(windowW/2, 0, windowW/2, windowH);
-                strokeWeight(windowW*.15);
-                stroke(this.palette.white);
-                line(0, windowH*.25, windowW, windowH*.25);
-                stroke(this.palette.white);
-                strokeWeight(windowH*.12);
-                noFill();
-                rect(0, 0, windowW, windowH, windowW, windowW, 0, 0);
+                twoD.fill(windowColour);
+                twoD.rect(0, 0, windowW, windowH, windowW, windowW, 0, 0);
+                twoD.stroke(barColour);
+                twoD.strokeWeight(windowW*.1);
+                twoD.line(windowW/2, 0, windowW/2, windowH);
+                twoD.strokeWeight(windowW*.15);
+                twoD.stroke(this.palette.white);
+                twoD.line(0, windowH*.25, windowW, windowH*.25);
+                twoD.stroke(this.palette.white);
+                twoD.strokeWeight(windowH*.12);
+                twoD.noFill();
+                twoD.rect(0, 0, windowW, windowH, windowW, windowW, 0, 0);
 
-                pop();
+                twoD.pop();
             }
         }
 
-        pop();
+        twoD.pop();
     }
 
     displayColumns() {
 
-        push();
+        twoD.push();
 
-        noStroke();
-        fill(this.palette.white);
+        twoD.noStroke();
+        twoD.fill(this.palette.white);
 
         for (let i = 108; i < height+5; i += 6) {
 
-            push();
-            rect(0, i, 25 + random(0, 10), random(5, 6));
-            rect(width, i, 25 + random(0, 10), random(5, 6));
-            pop();
+            twoD.push();
+            twoD.rect(0, i, 25 + random(0, 10), random(5, 6));
+            twoD.rect(width, i, 25 + random(0, 10), random(5, 6));
+            twoD.pop();
         }
 
-        pop();
+        twoD.pop();
     }
 
     displayRoof() {
 
-        push();
+        twoD.push();
 
-        rectMode(CORNER);
-        noStroke();
-        fill(this.palette.mid);
-        rect(0, 0, width, 128);
-        fill(this.palette.white);
-        rect(0, 0, width, 110);
+        twoD.rectMode(CORNER);
+        twoD.noStroke();
+        twoD.fill(this.palette.mid);
+        twoD.rect(0, 0, width, 128);
+        twoD.fill(this.palette.white);
+        twoD.rect(0, 0, width, 110);
 
-        push();
-        translate(0, 110);
-        noStroke();
-        fill(this.palette.white);
+        twoD.push();
+        twoD.translate(0, 110);
+        twoD.noStroke();
+        twoD.fill(this.palette.white);
 
         for (let i = 6; i < width; i+=15) {
 
-            rect(i, 0, 4, 6);
+            twoD.rect(i, 0, 4, 6);
         }
-        pop();
+        twoD.pop();
 
-        fill(this.palette.black);
-        rect(0, 0, width, 100);
+        twoD.fill(this.palette.black);
+        twoD.rect(0, 0, width, 100);
 
-        strokeWeight(1.5);
-        stroke(this.palette.white);
-        fill(this.palette.dark);
-        triangle(-2, 0, -2, 80, 160, 0);
-        triangle(width+2, 0, width+2, 80, width-160, 0);
-        noStroke();
-        rect(0, 0, width, 45)
+        twoD.strokeWeight(1.5);
+        twoD.stroke(this.palette.white);
+        twoD.fill(this.palette.dark);
+        twoD.triangle(-2, 0, -2, 80, 160, 0);
+        twoD.triangle(width+2, 0, width+2, 80, width-160, 0);
+        twoD.noStroke();
+        twoD.rect(0, 0, width, 45)
 
-        pop();
+        twoD.pop();
     }
 
     displayRailing() {
 
-        push();
-        translate(0, 5);
+        twoD.push();
+        twoD.translate(0, 5);
 
-        stroke(this.palette.white);
-        strokeWeight(1.5);
-        line(70, 25-1, width-70, 25-1);
+        twoD.stroke(this.palette.white);
+        twoD.strokeWeight(1.5);
+        twoD.line(70, 25-1, width-70, 25-1);
 
-        noFill();
-        strokeWeight(1.5);
-        stroke(this.palette.black);
+        twoD.noFill();
+        twoD.strokeWeight(1.5);
+        twoD.stroke(this.palette.black);
 
         for (let i = 70; i < width-70; i+=20) {
 
-            line(i, 20, i, 50);
-            ellipse(i, 25, 6);
-            ellipse(i+10, 33, 14);
-            ellipse(i+10, 42, 20);
+            twoD.line(i, 20, i, 50);
+            twoD.ellipse(i, 25, 6);
+            twoD.ellipse(i+10, 33, 14);
+            twoD.ellipse(i+10, 42, 20);
         }
-        line(width-70, 20, width-70, 50);
-        ellipse(width-70, 25, 6);
+        twoD.line(width-70, 20, width-70, 50);
+        twoD.ellipse(width-70, 25, 6);
 
-        line(70, 25, width-70, 25);
+        twoD.line(70, 25, width-70, 25);
 
-        fill(this.palette.dark);
-        noStroke();
-        rectMode(CORNER);
-        rect(0, 0, 70-1, 30);
-        rect(width-70+1, 0, width-70+1, 30);
+        twoD.fill(this.palette.dark);
+        twoD.noStroke();
+        twoD.rectMode(CORNER);
+        twoD.rect(0, 0, 70-1, 30);
+        twoD.rect(width-70+1, 0, width-70+1, 30);
 
-        stroke(this.palette.white);
-        strokeWeight(1.5);
-        line(70-1, 40, width-70+1, 40);
+        twoD.stroke(this.palette.white);
+        twoD.strokeWeight(1.5);
+        twoD.line(70-1, 40, width-70+1, 40);
 
-        pop();
+        twoD.pop();
     }
 
     displayDormers() {
 
-        push();
+        twoD.push();
 
         let w = 19;
         let h = w*2.3;
@@ -219,36 +234,74 @@ class Sketch7 extends Sketch {
 
         for (let i = padding; i <= width-padding; i+= w*2.4) {
 
-            strokeWeight(h*.18)
-            fill(this.palette.white);
-            stroke(this.palette.white);
-            rect(i, 80, w, h, 25, 25, 0, 0);
-            strokeWeight(h*.12)
-            stroke(this.palette.black);
-            fill(this.palette.black);
-            rect(i, 80, w, h, 25, 25, 0, 0);
+            twoD.strokeWeight(h*.18)
+            twoD.fill(this.palette.white);
+            twoD.stroke(this.palette.white);
+            twoD.rect(i, 80, w, h, 25, 25, 0, 0);
+            twoD.strokeWeight(h*.12)
+            twoD.stroke(this.palette.black);
+            twoD.fill(this.palette.black);
+            twoD.rect(i, 80, w, h, 25, 25, 0, 0);
 
             if (random() < 0.15) {
-                fill(this.palette.white);
+                twoD.fill(this.palette.white);
             }
-            rect(i, 91, w, h*.8);
-            stroke(this.palette.dark);
+            twoD.rect(i, 91, w, h*.8);
+            twoD.stroke(this.palette.dark);
 
-            strokeWeight(w*.1);
-            noFill();
-            line(i, 75, i, 100);
-            line(i-5, 85, i+5, 85);
-            rect(i, 87.5, 12, 22);
-            stroke(this.palette.light);
-            strokeWeight(h*.12)
-            rect(i, 91, w, h*.8);
+            twoD.strokeWeight(w*.1);
+            twoD.noFill();
+            twoD.line(i, 75, i, 100);
+            twoD.line(i-5, 85, i+5, 85);
+            twoD.rect(i, 87.5, 12, 22);
+            twoD.stroke(this.palette.light);
+            twoD.strokeWeight(h*.12)
+            twoD.rect(i, 91, w, h*.8);
         }
 
-        pop();
+        twoD.pop();
 
-        rectMode(CORNER);
+        twoD.rectMode(CORNER);
+        twoD.noStroke();
+        twoD.fill(this.palette.white);
+        twoD.rect(0, 99, width, 13);
+    }
+}
+
+class SnowParticle {
+
+    constructor() {
+
+        this.x = random(width);
+        this.y = random(height/2);
+        this.size = random(2, 5);
+    }
+
+    update() {
+
+        this.y += random(0.5, 1.5);
+
+        if (random() < 0.25) this.x += 0.8;
+        else this.x -= 0.8;
+
+        if (this.y > height/2) {
+            this.x = random(width);
+            this.y = 0;
+            this.size = random(2, 5);
+        }
+
+        if (this.x > width) this.x = 0;
+        else if (this.x < 0) this.x = width;
+    }
+
+    display() {
+
+        push();
+        translate(this.x, this.y);
+
         noStroke();
-        fill(this.palette.white);
-        rect(0, 99, width, 13);
+        ellipse(this.x, this.y, this.size);
+
+        pop();
     }
 }
