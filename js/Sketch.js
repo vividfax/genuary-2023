@@ -5,6 +5,8 @@ class Sketch {
     constructor(dayNumber) {
 
         this.dayNumber = dayNumber;
+
+        this.noLoop = false;
     }
 
     init() {
