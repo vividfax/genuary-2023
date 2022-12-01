@@ -120,10 +120,10 @@ class Sketch24 extends Sketch {
 
     displayGrid() {
 
+        twoD.background(this.palette.white);
+
         twoD.noStroke();
         twoD.fill(this.palette.light);
-
-        twoD.background(this.palette.white);
 
         for (let i = 4; i < width; i += this.stitchSize) {
             for (let j = 4; j < height; j += this.stitchSize) {
