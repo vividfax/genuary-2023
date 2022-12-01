@@ -159,9 +159,12 @@ class Sketch7 extends Sketch {
         fill(this.palette.black);
         rect(0, 0, width, 100);
 
+        strokeWeight(1.5);
+        stroke(this.palette.white);
         fill(this.palette.dark);
-        triangle(0, 0, 0, 80, 160, 0);
-        triangle(width, 0, width, 80, width-160, 0);
+        triangle(-2, 0, -2, 80, 160, 0);
+        triangle(width+2, 0, width+2, 80, width-160, 0);
+        noStroke();
         rect(0, 0, width, 45)
 
         pop();
@@ -171,6 +174,10 @@ class Sketch7 extends Sketch {
 
         push();
         translate(0, 5);
+
+        stroke(this.palette.white);
+        strokeWeight(1.5);
+        line(70, 25-1, width-70, 25-1);
 
         noFill();
         strokeWeight(1.5);
@@ -193,6 +200,10 @@ class Sketch7 extends Sketch {
         rectMode(CORNER);
         rect(0, 0, 70-1, 30);
         rect(width-70+1, 0, width-70+1, 30);
+
+        stroke(this.palette.white);
+        strokeWeight(1.5);
+        line(70-1, 40, width-70+1, 40);
 
         pop();
     }
