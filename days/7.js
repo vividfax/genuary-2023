@@ -14,7 +14,7 @@ class Sketch7 extends Sketch {
             "mid": "#FC90A7",
             "dark": "#C9A156",
             "black": "#313D58",
-            "extra": "#953535"
+            "extra": "#BA3333"
         }
 
         this.noLoop = true;
@@ -61,7 +61,8 @@ class Sketch7 extends Sketch {
             translate(0, -windowH/2);
             rectMode(CORNER);
             noStroke();
-            fill(this.palette.mid);
+            if (j < 6) fill(this.palette.mid);
+            else (fill(this.palette.dark));
             rect(0, j*windowH*1.7-windowH*.1, width, windowH*.25);
             rect(0, j*windowH*1.7+windowH, width, windowH*.25);
             fill(this.palette.white);
