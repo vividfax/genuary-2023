@@ -123,7 +123,7 @@ class Sketch7 extends Sketch {
         noStroke();
         fill(this.palette.white);
 
-        for (let i = 0; i < height; i += 6) {
+        for (let i = 108; i < height+5; i += 6) {
 
             push();
             rect(0, i, 25 + random(0, 10), random(5, 6));
