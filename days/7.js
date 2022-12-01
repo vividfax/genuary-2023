@@ -248,6 +248,6 @@ class Sketch7 extends Sketch {
         rectMode(CORNER);
         noStroke();
         fill(this.palette.white);
-        rect(0, 99, width, 10);
+        rect(0, 99, width, 13);
     }
 }
