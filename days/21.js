@@ -15,6 +15,7 @@ class Sketch21 extends Sketch {
         }
 
         this.complete = true;
+        this.noLoop = true;
         this.init();
     }
 
@@ -29,6 +30,8 @@ class Sketch21 extends Sketch {
     }
 
     prerun() {
+
+        this.size = height;
 
         push();
         translate(width/2, height/2);

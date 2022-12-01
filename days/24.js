@@ -63,6 +63,8 @@ class Sketch24 extends Sketch {
 
     display() {
 
+        push();
+
         clear();
         image(twoD, 0, 0, width, height);
 
@@ -117,6 +119,8 @@ class Sketch24 extends Sketch {
         }
 
         this.displayBackstitch();
+
+        pop();
     }
 
     displayGrid() {
