@@ -26,7 +26,7 @@ function createUI() {
 
 function nextDay() {
 
-    resetSketch();
+    // resetSketch();
     day++;
     updateUI();
     changeSketch();
@@ -34,7 +34,7 @@ function nextDay() {
 
 function previousDay() {
 
-    resetSketch();
+    // resetSketch();
     day--;
     updateUI();
     changeSketch();
@@ -42,8 +42,8 @@ function previousDay() {
 
 function regenerate() {
 
-    resetSketch();
-    loop();
+    // resetSketch();
+    // loop();
     changeSketch();
 }
 

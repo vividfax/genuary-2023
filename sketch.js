@@ -1,4 +1,4 @@
-let day = 7;
+let day = 27;
 
 let totalDays = 31;
 
@@ -58,7 +58,7 @@ function createSketches() {
 
 function resetSketch() {
 
-    sketches[day-1].init();
+    // sketches[day-1].init();
 }
 
 function changeSketch() {
@@ -66,11 +66,12 @@ function changeSketch() {
     threeD.clear();
     clear();
 
+    sketches[day-1].prerun();
+
     if (sketches[day-1].noLoop) {
         noLoop();
+        draw();
     } else {
         loop();
     }
-
-    sketches[day-1].prerun();
 }
