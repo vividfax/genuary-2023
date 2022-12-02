@@ -62,6 +62,7 @@ class Sketch25 extends Sketch {
     display() {
 
         threeD.clear();
+        threeD.noLights();
         threeD.push();
 
         threeD.background(this.palette.mid);
