@@ -26,15 +26,6 @@ class Sketch16 extends Sketch {
     display() {
 
         threeD.clear();
-        this.display3D();
-        this.displayCircles();
-        this.display3D();
-        this.displayCircles();
-        this.display3D();
-        this.displayCircles();
-        this.display3D();
-        this.displayCircles();
-        this.display3D();
         this.displayCircles();
         this.display3D();
 
@@ -49,6 +40,7 @@ class Sketch16 extends Sketch {
     display3D() {
 
         threeD.lights();
+        threeD.push();
         threeD.stroke(this.palette.light);
         threeD.strokeWeight(50);
         threeD.specularMaterial(250);
@@ -58,7 +50,10 @@ class Sketch16 extends Sketch {
         threeD.strokeWeight(1);
         threeD.noStroke();
         threeD.texture(canvas);
+        threeD.angleMode(DEGREES)
+        threeD.rotateZ(-90);
         threeD.torus(280, 180);
+        threeD.pop();
 
         image(threeD, 0, 0);
     }
