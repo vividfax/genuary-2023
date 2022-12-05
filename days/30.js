@@ -54,13 +54,13 @@ class Sketch30 extends Sketch {
         push();
         translate(width/2, height/2);
 
-        background(this.palette.black);
+        background(this.palette.white);
         background(this.blue);
 
         noStroke();
         fill(this.blue);
 
-        for (let i = 0; i < 500; i++) {
+        for (let i = 0; i < 950; i++) {
 
             push();
             rotate(random(-1, 1));
@@ -73,6 +73,8 @@ class Sketch30 extends Sketch {
 
             ellipse(x, y, size);
             ellipse(x, y, size);
+            ellipse(x, y, size);
+            ellipse(random(-width, width), random(-height, height), random(10, 50));
             ellipse(random(-width, width), random(-height, height), random(10, 50));
             ellipse(random(-width, width), random(-height, height), random(10, 50));
         }
