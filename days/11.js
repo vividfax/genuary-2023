@@ -75,8 +75,11 @@ class Sketch11 extends Sketch {
         rotate(random(360));
         noStroke();
 
+        loadPixels();
+        let pix = get(position[0], position[1]);
+
         let colour = randomColour(this.palette);
-        while (colour == this.palette.white) colour = randomColour(this.palette);
+        while (colour == this.palette.white || pix[0] == red(color(colour))) colour = randomColour(this.palette);
         fill(colour);
 
         let w = random(20+size, 90+size);
@@ -99,8 +102,11 @@ class Sketch11 extends Sketch {
         rotate(random(-4, 4));
         if (random() < 0.1) rotate(90);
 
+        loadPixels();
+        let pix = get(random(this.padding, width-this.padding), random(this.padding, height-this.padding));
+
         let colour = randomColour(this.palette);
-        while (colour == this.palette.white) colour = randomColour(this.palette);
+        while (colour == this.palette.white || pix[0] == red(color(colour))) colour = randomColour(this.palette);
         strokeCap(SQUARE);
         stroke(colour);
 
@@ -128,8 +134,11 @@ class Sketch11 extends Sketch {
         translate(random(this.padding, width-this.padding), random(this.padding, height-this.padding));
         rotate(random(360));
 
+        loadPixels();
+        let pix = get(random(this.padding, width-this.padding), random(this.padding, height-this.padding));
+
         let colour = randomColour(this.palette);
-        while (colour == this.palette.white) colour = randomColour(this.palette);
+        while (colour == this.palette.white || pix[0] == red(color(colour))) colour = randomColour(this.palette);
         fill(colour);
         noStroke();
 
@@ -144,8 +153,11 @@ class Sketch11 extends Sketch {
         translate(random(this.padding, width-this.padding), random(this.padding, height-this.padding));
         rotate(random(360));
 
+        loadPixels();
+        let pix = get(random(this.padding, width-this.padding), random(this.padding, height-this.padding));
+
         let colour = randomColour(this.palette);
-        while (colour == this.palette.white) colour = randomColour(this.palette);
+        while (colour == this.palette.white || pix[0] == red(color(colour))) colour = randomColour(this.palette);
         noFill();
         strokeWeight(random(20, 40));
         strokeCap(SQUARE);
@@ -166,8 +178,11 @@ class Sketch11 extends Sketch {
         let w = random(180+size, 200+size);
         let h = random(85+size, 90+size);
 
+        loadPixels();
+        let pix = get(random(this.padding, width-this.padding), random(this.padding, height-this.padding));
+
         let colour = randomColour(this.palette);
-        while (colour == this.palette.white) colour = randomColour(this.palette);
+        while (colour == this.palette.white || pix[0] == red(color(colour))) colour = randomColour(this.palette);
         fill(colour);
         arc(0, 0, w, h, 0, 360);
 
@@ -187,8 +202,12 @@ class Sketch11 extends Sketch {
 
         let length = random(15+size, 40+size);
         let spacing = random(20+size, 40+size);
+
+        loadPixels();
+        let pix = get(random(this.padding, width-this.padding), random(this.padding, height-this.padding));
+
         let colour = randomColour(this.palette);
-        while (colour == this.palette.white) colour = randomColour(this.palette);
+        while (colour == this.palette.white || pix[0] == red(color(colour))) colour = randomColour(this.palette);
         stroke(colour);
         strokeCap(PROJECT);
         strokeWeight(length/3);
@@ -212,8 +231,11 @@ class Sketch11 extends Sketch {
         translate(random(this.padding, width-this.padding), random(this.padding, height-this.padding));
         rotate(this.angle-90);
 
+        loadPixels();
+        let pix = get(random(this.padding, width-this.padding), random(this.padding, height-this.padding));
+
         let colour = randomColour(this.palette);
-        while (colour == this.palette.white) colour = randomColour(this.palette);
+        while (colour == this.palette.white || pix[0] == red(color(colour))) colour = randomColour(this.palette);
 
         noStroke();
         fill(colour);
