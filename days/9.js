@@ -18,7 +18,7 @@ class Sketch9 extends Sketch {
         this.complete = true;
         this.noLoop = true;
 
-        this.potSize = 60;
+        this.potSize = 75;
         this.numberOfPots = 5;
 
         this.plantY = this.potSize/2;
@@ -36,6 +36,8 @@ class Sketch9 extends Sketch {
 
         background(this.palette.white);
 
+        let plants = ["TallPlant", "Pilea", "Cactus"];
+
         push();
         translate(width/2, height/2);
 
@@ -44,7 +46,14 @@ class Sketch9 extends Sketch {
             translate(i*this.potSize*1.2, this.potSize*1.5);
             this.displayPotShape()
             this.displayPotPattern();
-            let plant = new Plant(this);
+
+            let plantType = random(plants);
+            let plant;
+
+            if (plantType == "TallPlant") plant = new TallPlant(this);
+            else if (plantType == "Pilea") plant = new Pilea(this);
+            else if (plantType == "Cactus") plant = new Cactus(this);
+
             plant.display();
             pop();
         }
@@ -109,22 +118,9 @@ class Sketch9 extends Sketch {
 
         pop();
     }
-
-    displayPlant() {
-
-        push();
-
-        strokeWeight(4);
-        strokeCap(SQUARE);
-        stroke(this.palette.black);
-
-        line(0, -this.potSize/2, 0, -this.potSize*.6);
-
-        pop();
-    }
 }
 
-class Plant {
+class TallPlant {
 
     constructor(sketch) {
 
@@ -151,7 +147,7 @@ class Plant {
         this.nodes.push([this.x, this.y]);
     }
 
-    display(x, y) {
+    display() {
 
         push();
 
@@ -160,20 +156,24 @@ class Plant {
             strokeWeight(4);
             stroke(this.sketch.palette.black);
 
-            if (i == this.nodes.length-1) strokeCap(ROUND);
+            if (i != 1) strokeCap(ROUND);
             else strokeCap(SQUARE);
             line(this.nodes[i-1][0], this.nodes[i-1][1], this.nodes[i][0], this.nodes[i][1]);
 
             let leaningLeft = false;
+            let double = false;
 
             if (i == this.nodes.length-1) leaningLeft = int(random());
             else if (this.nodes[i][0] < this.nodes[i+1][0]) leaningLeft = true;
 
+            if (leaningLeft && mod(i, 2)) double = true;
+            if (!leaningLeft && mod(i, 2) == 0) double = true;
+
             let x;
             let y = this.nodes[i][1] - random(5, 10);
 
-            if (leaningLeft) x = this.nodes[i][0] - random(3, 5)*(this.nodes.length-i);
-            else x = this.nodes[i][0] - random(-5, -3)*(this.nodes.length-i);
+            if (leaningLeft) x = this.nodes[i][0] - random(5, 8)*(this.nodes.length-1-i);
+            else x = this.nodes[i][0] - random(-8, -5)*(this.nodes.length-1-i);
 
             let angle = atan2(y-this.nodes[i][1], x-this.nodes[i][0]);
 
@@ -194,8 +194,204 @@ class Plant {
             rect(0, 0, (this.nodes.length-i)*2*2-3, 1, 2);
             pop();
 
+            if (double) {
+                if (!leaningLeft) x = this.nodes[i][0] - random(5, 8)*(this.nodes.length-1-i);
+                else x = this.nodes[i][0] - random(-8, -5)*(this.nodes.length-1-i);
+
+                let angle = atan2(y-this.nodes[i][1], x-this.nodes[i][0]);
+
+                strokeCap(ROUND);
+                line(this.nodes[i][0], this.nodes[i][1], x, y);
+
+                push();
+                translate(x, y);
+                rotate(angle);
+                let colours = [this.sketch.palette.dark, this.sketch.palette.black];
+                colours = shuffle(colours);
+                let leafColour = colours.pop();
+                let detailColour = colours.pop();
+                fill(leafColour);
+                noStroke();
+                ellipse(0, 0, (this.nodes.length-i)*2*2+3, (this.nodes.length-i)*2+3);
+                fill(detailColour);
+                rect(0, 0, (this.nodes.length-i)*2*2-3, 1, 2);
+                pop();
+            }
         }
 
         pop();
+    }
+}
+
+class Pilea {
+
+    constructor(sketch) {
+
+        this.sketch = sketch;
+        this.x = 0;
+        this.y = -sketch.potSize/2;
+        this.nodes = [];
+        this.nodes.push([this.x, this.y]);
+        this.numberOfNodes = random(5, 15);
+
+        for (let i = 0; i < this.numberOfNodes; i++) {
+
+            this.nodes.push([this.x, this.y-i*2]);
+        }
+
+        this.leaves = [];
+        this.radius = 5;
+
+        while (this.leaves.length < this.numberOfNodes) this.tryToMakeLeaf();
+    }
+
+    tryToMakeLeaf() {
+
+        let x = random(-this.radius, this.radius);
+        let y = random(-this.radius, this.radius);
+        let valid = true;
+
+        for (let j = 0; j < this.leaves.length; j++)
+        {
+            let distance = dist(x, y, this.leaves[j][0], this.leaves[j][1]);
+            if (distance < 15) valid = false;
+        }
+
+        if (valid) this.leaves.push([x, y]);
+        else if (random() < 0.1) this.radius++;
+    }
+
+    display() {
+
+        push();
+
+        for (let i = 1; i < this.nodes.length; i++) {
+
+            strokeWeight(4);
+            stroke(this.sketch.palette.black);
+
+            if (i > 2) strokeCap(ROUND);
+            else strokeCap(SQUARE);
+            line(this.nodes[i-1][0], this.nodes[i-1][1], this.nodes[i][0], this.nodes[i][1]);
+
+            if (i <= 1) continue;
+
+            strokeWeight(2);
+            line(this.nodes[i][0], this.nodes[i][1], this.leaves[i-1][0], this.leaves[i-1][1] + this.nodes[this.nodes.length-1][1]);
+        }
+
+        push();
+        translate(0, this.nodes[this.nodes.length-1][1]);
+        noStroke();
+
+        for (let i = 0; i < this.leaves.length; i++) {
+
+            push();
+            translate(this.leaves[i][0], this.leaves[i][1]);
+            rotate(random(360));
+
+            let colours = [this.sketch.palette.dark, this.sketch.palette.black];
+            colours = shuffle(colours);
+            let leafColour = colours.pop();
+            let detailColour = colours.pop();
+            fill(leafColour);
+            ellipse(0, 0, random(13, 17));
+            fill(detailColour);
+            ellipse(0, -3, 2);
+
+            pop();
+        }
+        pop();
+
+        pop();
+    }
+}
+
+class Cactus {
+
+    constructor(sketch) {
+
+        this.sketch = sketch;
+        this.x = 0;
+        this.y = -sketch.potSize/2;
+        this.nodes = [];
+        this.nodes.push([this.x, this.y]);
+
+        this.leaves = [];
+
+        let startingLeaf = {
+            x: this.x,
+            y: -45,
+            layer: 0,
+            angle: 0,
+            size: 20,
+        }
+        this.leaves.push(startingLeaf);
+
+        this.addLeaf();
+    }
+
+    addLeaf() {
+
+        for (let i = 0; i < this.leaves.length; i++) {
+
+            if (this.leaves[i].layer >= 2) continue;
+
+            if (random() < 0.5) { // add one leaf
+
+                // let lean = random(-8, 8);
+                let lean = (random(-8, 8)/((this.leaves[i].layer/3)+1));
+                let x = this.leaves[i].x + lean;
+                let y = this.leaves[i].y - this.leaves[i].size + abs(lean)*.5;
+
+                let newLeaf = {
+
+                    x: x,
+                    y: y,
+                    layer: this.leaves[i].layer+1,
+                    angle: lean*3,
+                    size: this.leaves[i].size*.7,
+                }
+
+                this.leaves.push(newLeaf);
+
+            } else if (random() < 0.8) { // add two leaves
+
+                for (let j = -1; j <= 1; j+=2) {
+
+                    let lean = (random(8, 10)/((this.leaves[i].layer/3)+1)) * j;
+                    let x = this.leaves[i].x*1.3 + lean;
+                    let y = this.leaves[i].y - this.leaves[i].size + abs(lean)*.5;
+
+                    let newLeaf = {
+
+                        x: x,
+                        y: y,
+                        layer: this.leaves[i].layer+1,
+                        angle: lean*3,
+                        size: this.leaves[i].size*.7,
+                    }
+
+                    this.leaves.push(newLeaf);
+                }
+            } else; // no leaf
+        }
+    }
+
+    display() {
+
+        noStroke();
+
+        for (let i = this.leaves.length-1; i > 0; i--) {
+            fill(random([this.sketch.palette.dark, this.sketch.palette.black]));
+            push();
+            translate(this.leaves[i].x, this.leaves[i].y);
+            rotate(this.leaves[i].angle)
+            ellipse(0, 0, this.leaves[i].size*random(0.9, 1.1), this.leaves[i].size*1.5*random(0.9, 1.1));
+            pop();
+        }
+
+        fill(random([this.sketch.palette.dark, this.sketch.palette.black]));
+        arc(this.x, this.y-8, 20, 30, 135, 45, CHORD);
     }
 }
