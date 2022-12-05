@@ -398,10 +398,9 @@ class Cactus {
         fill(random([this.sketch.palette.dark, this.sketch.palette.black]));
         arc(this.x, this.y-8, 20, 30, 135, 45, CHORD);
 
-        loadPixels();
-
         resetMatrix();
         noFill();
+        loadPixels();
 
         for (let i = this.dotsX-this.sketch.potSize*.3; i <= this.dotsX+this.sketch.potSize*.3; i += 6) {
             for (let j = this.dotsY-this.sketch.potSize*1.6; j < this.dotsY - this.sketch.potSize*1.0; j += 6) {
@@ -409,7 +408,7 @@ class Cactus {
                 let x = int(i);
                 let y = int(j);
 
-                if (mod(y, 12) == 0) x += 3;
+                if (mod(y, 12) == 4) x += 3;
 
                 if (get(x, y)[0] == 32) fill(color(this.sketch.palette.dark));
                 else if (get(x, y)[0] == 103) fill(color(this.sketch.palette.black));
