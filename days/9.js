@@ -36,23 +36,24 @@ class Sketch9 extends Sketch {
 
         background(this.palette.white);
 
-        let plants = ["TallPlant", "Pilea", "Cactus"];
-
         push();
         translate(width/2, height/2);
 
+        let plants = ["TallPlant", "Pilea", "TallPlant", "Pilea", "Cactus"];
+        plants = shuffle(plants);
+
         for (let i = -int(this.numberOfPots/2); i <= int(this.numberOfPots/2); i++) {
             push();
-            translate(i*this.potSize*1.2, this.potSize*1.5);
+            translate(i*this.potSize*1.2, this.potSize*1);
             this.displayPotShape()
             this.displayPotPattern();
 
-            let plantType = random(plants);
+            let plantType = plants[i+2];
             let plant;
 
             if (plantType == "TallPlant") plant = new TallPlant(this);
             else if (plantType == "Pilea") plant = new Pilea(this);
-            else if (plantType == "Cactus") plant = new Cactus(this);
+            else if (plantType == "Cactus") plant = new Cactus(this, width/2 + i*this.potSize*1.2, height/2 + this.potSize*1.5);
 
             plant.display();
             pop();
@@ -142,7 +143,7 @@ class TallPlant {
     createNodes(i) {
 
         this.x -= random(-3, 3)*(this.numberOfNodes-i);
-        this.y -= random(5, 10)*(this.numberOfNodes-i);
+        this.y -= random(5, 8)*(this.numberOfNodes-i);
 
         this.nodes.push([this.x, this.y]);
     }
@@ -172,8 +173,8 @@ class TallPlant {
             let x;
             let y = this.nodes[i][1] - random(5, 10);
 
-            if (leaningLeft) x = this.nodes[i][0] - random(5, 8)*(this.nodes.length-1-i);
-            else x = this.nodes[i][0] - random(-8, -5)*(this.nodes.length-1-i);
+            if (leaningLeft) x = this.nodes[i][0] - random(3, 6)*(this.nodes.length-1-i);
+            else x = this.nodes[i][0] - random(-6, -3)*(this.nodes.length-1-i);
 
             let angle = atan2(y-this.nodes[i][1], x-this.nodes[i][0]);
 
@@ -195,8 +196,8 @@ class TallPlant {
             pop();
 
             if (double) {
-                if (!leaningLeft) x = this.nodes[i][0] - random(5, 8)*(this.nodes.length-1-i);
-                else x = this.nodes[i][0] - random(-8, -5)*(this.nodes.length-1-i);
+                if (!leaningLeft) x = this.nodes[i][0] - random(3, 6)*(this.nodes.length-1-i);
+                else x = this.nodes[i][0] - random(-6, -3)*(this.nodes.length-1-i);
 
                 let angle = atan2(y-this.nodes[i][1], x-this.nodes[i][0]);
 
@@ -309,13 +310,16 @@ class Pilea {
 
 class Cactus {
 
-    constructor(sketch) {
+    constructor(sketch, dotsX, dotsY) {
 
         this.sketch = sketch;
         this.x = 0;
         this.y = -sketch.potSize/2;
         this.nodes = [];
         this.nodes.push([this.x, this.y]);
+
+        this.dotsX = dotsX;
+        this.dotsY = dotsY;
 
         this.leaves = [];
 
@@ -393,5 +397,27 @@ class Cactus {
 
         fill(random([this.sketch.palette.dark, this.sketch.palette.black]));
         arc(this.x, this.y-8, 20, 30, 135, 45, CHORD);
+
+        loadPixels();
+
+        resetMatrix();
+        noFill();
+
+        for (let i = this.dotsX-this.sketch.potSize*.3; i <= this.dotsX+this.sketch.potSize*.3; i += 6) {
+            for (let j = this.dotsY-this.sketch.potSize*1.6; j < this.dotsY - this.sketch.potSize*1.0; j += 6) {
+
+                let x = int(i);
+                let y = int(j);
+
+                if (mod(y, 12) == 0) x += 3;
+
+                if (get(x, y)[0] == 32) fill(color(this.sketch.palette.dark));
+                else if (get(x, y)[0] == 103) fill(color(this.sketch.palette.black));
+
+                ellipse(x, y, 2);
+
+                noFill();
+            }
+        }
     }
 }
