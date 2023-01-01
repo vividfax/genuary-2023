@@ -1,4 +1,4 @@
-let day = 29;
+let day = 1;
 
 let totalDays = 31;
 

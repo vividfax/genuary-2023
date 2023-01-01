@@ -7,19 +7,34 @@ class Sketch2 extends Sketch {
         super(dayNumber);
 
         this.palette = {
-            "white": 255,
-            "light": 191,
-            "mid": 127,
-            "dark": 63,
-            "black": 0,
+            "white": "#F0F3BD",
+            "light": "#02C39A",
+            "mid": "#00A896",
+            "dark": "#028090",
+            "black": "#05668D"
         }
+
+        this.complete = true;
+
+        this.size;
+    }
+
+    prerun() {
+
+        background(randomColour(this.palette));
     }
 
     update() {
 
+        this.size = random(width*2);
     }
 
     display() {
 
+        push();
+        noFill();
+        stroke(randomColour(this.palette));
+        circle(width/2, height/2, this.size);
+        pop();
     }
 }

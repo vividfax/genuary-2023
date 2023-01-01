@@ -165,7 +165,7 @@ class Sketch24 extends Sketch {
     displayBackstitch() {
 
         stroke(this.palette.dark);
-        strokeWeight(2);
+        strokeWeight(1.5);
 
         for (let i = 0; i < stitches.length; i++) {
             for (let h = 0; h < stitches[i].length; h++) {

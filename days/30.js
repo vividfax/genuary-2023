@@ -79,7 +79,7 @@ class Sketch30 extends Sketch {
             ellipse(random(-width, width), random(-height, height), random(10, 50));
         }
 
-        stroke(this.palette.black);
+        stroke(this.palette.white);
         translate(-width/2, -height/2);
         line(0, height/2, width, height/2);
 
