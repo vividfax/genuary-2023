@@ -24,34 +24,6 @@ class Sketch8 extends Sketch {
 
     display() {
 
-        // threeD.push();
-        // threeD.background(this.palette.dark);
-
-        // threeD.fill(this.palette.white);
-        // threeD.sphere(450);
-
-        // threeD.push();
-        // threeD.translate(0, 40, 0);
-        // threeD.fill(this.palette.black);
-        // threeD.sphere(450);
-        // threeD.pop();
-
-        // threeD.push();
-        // threeD.translate(-40, 0, 0);
-        // threeD.fill(this.palette.light);
-        // threeD.sphere(450);
-        // threeD.pop();
-
-        // threeD.push();
-        // threeD.translate(0, 0, -400);
-        // threeD.fill(this.palette.light);
-        // threeD.sphere(150);
-        // threeD.pop();
-
-        // threeD.pop();
-
-        // image(threeD, 0, 0);
-
         let palette = [this.palette.white, this.palette.light, this.palette.mid, this.palette.dark, this.palette.black];
         palette = shuffle(palette);
 
