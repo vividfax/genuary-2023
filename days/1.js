@@ -30,7 +30,7 @@ class Sketch1 extends Sketch {
         this.backgroundColour = randomColour(this.palette);
         background(this.backgroundColour);
 
-        for (let i = 0; i < 1440; i++) {
+        for (let i = 0; i < 1080; i++) {
             this.update();
             this.display();
         }
@@ -65,7 +65,7 @@ class Mover {
         this.positionDegree = random(360);
         this.positionDirection = random([-1, 1]);
         this.positionRadius = 0;
-        this.movementSpeed = 0.25;
+        this.movementSpeed = 1/3;
 
         this.x = 150;
         this.y = -150;

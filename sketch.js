@@ -15,6 +15,8 @@ let limelightFont;
 
 var scribble;
 
+let portraitImage;
+
 function preload() {
 
     promptTexts = loadJSON("./json/prompts.json");
@@ -23,6 +25,8 @@ function preload() {
     pumpkin3D = loadModel("./objs/pumpkin.obj");
 
     limelightFont = loadFont("./fonts/Limelight-Regular.ttf");
+
+    portraitImage = loadImage("./images/portrait.jpg");
 }
 
 function setup() {
