@@ -12,6 +12,8 @@ let twoD;
 let threeD;
 
 let limelightFont;
+let balooTamma2Font;
+let silkscreenFont;
 
 var scribble;
 
@@ -25,6 +27,8 @@ function preload() {
     pumpkin3D = loadModel("./objs/pumpkin.obj");
 
     limelightFont = loadFont("./fonts/Limelight-Regular.ttf");
+    balooTamma2Font = loadFont("./fonts/BalooTamma2-Regular.ttf");
+    silkscreenFont = loadFont("./fonts/Silkscreen-Regular.ttf");
 
     portraitImage = loadImage("./images/portrait.jpg");
 }
