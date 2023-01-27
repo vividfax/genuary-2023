@@ -14,6 +14,7 @@ let threeD;
 let limelightFont;
 let balooTamma2Font;
 let silkscreenFont;
+let playfairFont;
 
 var scribble;
 
@@ -29,6 +30,7 @@ function preload() {
     limelightFont = loadFont("./fonts/Limelight-Regular.ttf");
     balooTamma2Font = loadFont("./fonts/BalooTamma2-Regular.ttf");
     silkscreenFont = loadFont("./fonts/Silkscreen-Regular.ttf");
+    playfairFont = loadFont("./fonts/PlayfairDisplay-VariableFont_wght.ttf");
 
     portraitImage = loadImage("./images/portrait.jpg");
 }
