@@ -29,7 +29,7 @@ function nextDay() {
     let prospectiveDay = day;
     prospectiveDay++;
     while (prospectiveDay < totalDays && !sketches[prospectiveDay-1].complete) prospectiveDay++;
-    if (prospectiveDay >= totalDays) return;
+    if (prospectiveDay > totalDays) return;
 
     day = prospectiveDay;
 

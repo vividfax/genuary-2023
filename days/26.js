@@ -39,9 +39,9 @@ class Sketch26 extends Sketch {
             let colour = randomColour(this.palette);
             while (colour == this.backgroundColour) colour = randomColour(this.palette);
 
-            this.wobblyCircles.push(new WobblyCircle(random(50, 90), random(100, width-100), random(100, height-100), colour));
-            this.wobblyCircles.push(new WobblyCircle(random(5, 10), random(50, width-50), random(50, height-50), colour));
-            this.wobblyCircles.push(new WobblyCircle(random(5, 10), random(50, width-50), random(50, height-50), colour));
+            this.wobblyCircles.push(new WobblyCircle(random(50, 90), 1, random(100, width-100), random(100, height-100), colour));
+            this.wobblyCircles.push(new WobblyCircle(random(5, 10), 1, random(50, width-50), random(50, height-50), colour));
+            this.wobblyCircles.push(new WobblyCircle(random(5, 10), 1, random(50, width-50), random(50, height-50), colour));
         }
     }
 
@@ -60,23 +60,22 @@ class Sketch26 extends Sketch {
         background(this.backgroundColour);
         background(this.backgroundColour);
 
-
         for (let i = 0; i < this.wobblyCircles.length; i++) {
-            this.wobblyCircles[i].display();
+            this.wobblyCircles[i].display(0, 0);
         }
     }
 }
 
 class WobblyCircle {
 
-    constructor(radius, x, y, colour) {
+    constructor(radius, wobble, x, y, colour) {
 
         this.x = x;
         this.y = y;
         this.radius = radius;
         this.colour = colour;
 
-        this.offset = radius/20;
+        this.offset = (radius+1)/20*wobble;
 
         this.offsets = [];
         this.offsetDirections = [];
@@ -100,15 +99,42 @@ class WobblyCircle {
         }
     }
 
-    display() {
+    overlap(otherCircle) {
+
+        let distance = dist(this.x, this.y, otherCircle.x, otherCircle.y);
+        let radii = this.radius + otherCircle.radius + 3;
+
+        if (distance < radii) return true;
+    }
+
+    hitsEdge() {
+
+        let borderWidth = 27;
+
+        if (this.x + this.radius >= width-borderWidth) return true;
+        else if (this.x - this.radius <= borderWidth) return true;
+        else if (this.y + this.radius >= height-borderWidth) return true;
+        else if (this.y - this.radius <= borderWidth) return true;
+    }
+
+    grow() {
+
+        this.radius++;
+    }
+
+    display(offsetX, offsetY, col) {
+
+        let colour = col || this.colour;
 
         let radius = this.radius;
 
+        if (radius <= 0) return;
+
         push();
-        translate(this.x, this.y);
+        translate(this.x + offsetX, this.y + offsetY);
         angleMode(DEGREES);
         noStroke();
-        fill(this.colour);
+        fill(colour);
 
         beginShape();
 
