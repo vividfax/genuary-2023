@@ -37,6 +37,17 @@ class Sketch10 extends Sketch {
 
     display() {
 
+        if (!musicPlaying) {
+
+            push();
+            fill(this.palette.white);
+            textAlign(CENTER, CENTER);
+            textSize(20);
+            text("Click here to play music", width/2, height/2);
+            pop();
+            return;
+        }
+
         if (frameCount % 15 != 0) return;
 
         this.now = Tone.now()

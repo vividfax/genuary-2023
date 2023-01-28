@@ -20,6 +20,8 @@ var scribble;
 
 let portraitImage;
 
+let musicPlaying = false;
+
 function preload() {
 
     promptTexts = loadJSON("./json/prompts.json");
@@ -91,5 +93,16 @@ function changeSketch() {
         draw();
     } else {
         loop();
+    }
+
+    musicPlaying = false;
+}
+
+function mousePressed() {
+
+    if (day == 10) {
+        if ((mouseX > 0 && mouseX < width) && (mouseY > 0 && mouseY < height)) {
+            musicPlaying = true;
+        }
     }
 }
