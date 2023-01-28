@@ -102,7 +102,8 @@ function mousePressed() {
 
     if (day == 10) {
         if ((mouseX > 0 && mouseX < width) && (mouseY > 0 && mouseY < height)) {
-            musicPlaying = true;
+            if (!musicPlaying) musicPlaying = true;
+            else if (musicPlaying) musicPlaying = false;
         }
     }
 }

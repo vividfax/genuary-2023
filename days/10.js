@@ -40,6 +40,7 @@ class Sketch10 extends Sketch {
         if (!musicPlaying) {
 
             push();
+            background(this.palette.mid);
             fill(this.palette.white);
             textAlign(CENTER, CENTER);
             textSize(20);
